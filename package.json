@@ -1,0 +1,22 @@
+{
+  "name": "genetic-flappy",
+  "version": "1.0.0",
+  "description": "flappy bird with genetic algorithm",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orbarkai/genetic-flappy.git"
+  },
+  "author": "Or Barkai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orbarkai/genetic-flappy/issues"
+  },
+  "homepage": "https://github.com/orbarkai/genetic-flappy#readme",
+  "dependencies": {
+    "p5": "^0.10.2"
+  }
+}

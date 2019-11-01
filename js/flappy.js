@@ -158,7 +158,6 @@ class Pole {
     }
 
     update() {
-        this.speed = 3;
         this.x -= this.speed;
     }
 

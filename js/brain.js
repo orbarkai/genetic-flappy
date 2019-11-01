@@ -1,6 +1,6 @@
-class Brain{
+class Brain {
 
-    constructor(){
+    constructor() {
         this.inputNodes = 5;
         this.hiddenNodes = 6;
         this.outputNodes = 1;
@@ -8,9 +8,9 @@ class Brain{
         this.output_weights = tf.randomNormal([this.hiddenNodes, this.outputNodes]);
     }
 
-    predict(input){
+    predict(input) {
         let output;
-        tf.tidy(()=>{
+        tf.tidy(() => {
             let input_layer = tf.tensor(input, [1, this.inputNodes]);
             let hidden_layer = input_layer.matMul(this.input_weights).sigmoid();
             let output_layer = hidden_layer.matMul(this.output_weights).sigmoid();
@@ -19,7 +19,7 @@ class Brain{
         return output[0];
     }
 
-    clone(){
+    clone() {
         let clonie = new Brain();
         clonie.dispose();
         clonie.input_weights = tf.clone(this.input_weights);
@@ -27,7 +27,7 @@ class Brain{
         return clonie;
     }
 
-    dispose(){
+    dispose() {
         this.input_weights.dispose();
         this.output_weights.dispose();
     }

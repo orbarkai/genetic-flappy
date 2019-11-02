@@ -20,20 +20,21 @@ class Bird {
 
             this.tryJump(this.closest(poles));
 
+             // Gravity
             this.vel.y += 0.3;
+             // Update Pos
             this.pos.add(this.vel);
 
-            if (this.collide(poles)) {
-                this.alive = false;
-            }
+            // Check If Dies
+            if (this.collide(poles)) this.alive = false;
 
             this.score += 0.01;
         }
     }
 
     show() {
-        strokeWeight(3);
         if (this.alive) {
+            strokeWeight(3);
             stroke(this.clr);
             fill(this.clr.levels[0], this.clr.levels[1], this.clr.levels[2], 100);
             ellipse(this.pos.x, this.pos.y, this.r * 2);
@@ -60,7 +61,7 @@ class Bird {
     tryJump(closest) {
 
         let inputs = [];
-        inputs[0] = this.vel.y / 20;
+        inputs[0] = this.vel.y;
         inputs[1] = this.pos.y / height;
         inputs[2] = closest.top / height;
         inputs[3] = closest.bottom / height;
@@ -122,7 +123,7 @@ class Bird {
     }
 
     mutate(mr) {
-        function fn(x) {
+        function tweak(x) {
             if (random(1) < mr) {
                 let offset = randomGaussian() * 0.55;
                 let newx = x + offset;
@@ -131,12 +132,12 @@ class Bird {
             return x;
         }
 
-        let ih = this.brain.input_weights.dataSync().map(fn);
+        let ih = this.brain.input_weights.dataSync().map(tweak);
         let ih_shape = this.brain.input_weights.shape;
         this.brain.input_weights.dispose();
         this.brain.input_weights = tf.tensor(ih, ih_shape);
 
-        let ho = this.brain.output_weights.dataSync().map(fn);
+        let ho = this.brain.output_weights.dataSync().map(tweak);
         let ho_shape = this.brain.output_weights.shape;
         this.brain.output_weights.dispose();
         this.brain.output_weights = tf.tensor(ho, ho_shape);

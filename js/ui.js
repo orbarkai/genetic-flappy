@@ -1,4 +1,4 @@
-function ui() {
+function ui(history, passed) {
     let uiWidth = 400;
 
     //bg

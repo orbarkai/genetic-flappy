@@ -149,8 +149,8 @@ class Bird {
 
 class Pole {
 
-    constructor(margin, width_, speed_) {
-        this.x = width;
+    constructor(margin, width_, speed_, x_) {
+        this.x = x_ || width;
         this.top = random(height - margin);
         this.bottom = this.top + margin;
         this.width = width_;

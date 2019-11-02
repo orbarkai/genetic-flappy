@@ -7,12 +7,11 @@ class Game {
 
         this.initWorld();
 
-        // TODO: is it needed?
-        this.poles.push(new Pole(this.pole_height, this.pole_width, this.pole_speed));
+        
     }
 
     initWorld() {
-        this.poles = [new Pole(this.pole_height, this.pole_width, this.pole_speed)];
+        this.poles = [];
         this.spawnRate = 180;
         this.spawnCounter = 0;
         this.passed = 0;
@@ -21,6 +20,12 @@ class Game {
         this.pole_speed = 2;
         this.pole_width = 50;
         this.pole_height = 180;
+
+        let poleMargin = this.spawnRate * this.pole_speed; 
+        for (let i = width; i >= 700 + poleMargin; i -= poleMargin) {
+            this.poles.push(new Pole(this.pole_height, this.pole_width, this.pole_speed, i));
+        }
+        
     }
 
     update() {
@@ -34,7 +39,7 @@ class Game {
         this.spawnCounter++;
 
         //update pop
-        this.pop.update(this.poles);
+        this.pop.update(this.poles.sort((a, b) => a.x - b.x));
 
         //summon poles
         if (this.spawnCounter >= this.spawnRate) {

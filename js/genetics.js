@@ -86,7 +86,12 @@ class Population {
     }
 
     pass() {
-        for (let bird of this.birds) bird.alive ? bird.passed++ : bird.passed = bird.passed;
+        for (let bird of this.birds) {
+            if (bird.alive) {
+                bird.passed++;
+                bird.score *= 2;
+            }
+        }
     }
 
     avgPassed() {

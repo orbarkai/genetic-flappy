@@ -32,7 +32,7 @@ class Bird {
 
             let poleGapMiddle = (closestPole.bottom + closestPole.top) / 2;
             let distanceFromMiddle = Math.abs(poleGapMiddle - this.pos.y);
-            let score = map(distanceFromMiddle, 0, height, 0.02, 0.01);
+            let score = map(distanceFromMiddle, 0, height, 0.02, 0);
 
             this.score += score;
         }

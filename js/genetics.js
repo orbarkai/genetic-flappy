@@ -89,7 +89,6 @@ class Population {
         for (let bird of this.birds) {
             if (bird.alive) {
                 bird.passed++;
-                bird.score *= 2;
             }
         }
     }

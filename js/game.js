@@ -43,7 +43,7 @@ class Game {
         //update poles  
         for (let i = 0; i < this.poles.length; i++) {
             this.poles[i].update();
-            if (!this.poles[i].passed && this.poles[i].x + this.poles[i].width < this.pop.birds[0].pos.x - this.pop.birds[0].r) {
+            if (!this.poles[i].passed && this.poles[i].x + Pole.width < this.pop.birds[0].pos.x - this.pop.birds[0].r) {
                 this.poles[i].passed = true;
                 this.pop.pass();
                 this.passed++;
@@ -52,7 +52,7 @@ class Game {
 
         //delete unnecesery poles
         for (let i = this.poles.length - 1; i >= 0; i--) {
-            if (this.poles[i].x + this.poles[i].width <= 0) this.poles.splice(i, 1);
+            if (this.poles[i].x + Pole.width <= 0) this.poles.splice(i, 1);
         }
     }
 

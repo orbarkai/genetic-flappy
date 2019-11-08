@@ -36,6 +36,7 @@ class Bird {
 
             this.score += score;
         }
+
     }
 
     show() {
@@ -45,6 +46,8 @@ class Bird {
             fill(this.clr.levels[0], this.clr.levels[1], this.clr.levels[2], 100);
             ellipse(this.pos.x, this.pos.y, this.r * 2);
         }
+
+        
     }
 
     jump() {

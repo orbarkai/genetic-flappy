@@ -100,12 +100,15 @@ class Bird {
         let child_input = [];
         let child_output = [];
 
+        let breakPoint = random(my_input.length);
         for (let i = 0; i < my_input.length; i++) {
-            if (random() > 0.5) child_input.push(my_input[i]);
+            if (i < breakPoint) child_input.push(my_input[i]);
             else child_input.push(other_input[i]);
         }
+
+        breakPoint = random(my_input.length);
         for (let i = 0; i < my_output.length; i++) {
-            if (random() > 0.5) child_output.push(my_output[i]);
+            if (i < breakPoint) child_output.push(my_output[i]);
             else child_output.push(other_output[i]);
         }
 

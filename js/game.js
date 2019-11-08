@@ -19,7 +19,7 @@ class Game {
 
         this.pole_speed = 2;
         this.pole_width = 50;
-        this.pole_height = 180;
+        this.pole_height = 250;
 
         let poleMargin = this.spawnRate * this.pole_speed; 
         for (let i = width; i >= 700 + poleMargin; i -= poleMargin) {

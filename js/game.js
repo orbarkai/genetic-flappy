@@ -1,7 +1,6 @@
 class Game {
 
     constructor (pop) {
-        console.log('constructro, pop');
         this.pop = pop;
         this.speed = 1;
         this.history = [];
@@ -10,7 +9,6 @@ class Game {
     }
 
     initWorld() {
-        console.log('init');
         this.poles = [];
         this.spawnRate = 180;
         this.spawnCounter = 0;

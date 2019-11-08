@@ -67,7 +67,7 @@ class Bird {
     tryJump(closest) {
 
         let inputs = [];
-        inputs[0] = this.vel.y;
+        inputs[0] = this.vel.y / 100;
         inputs[1] = this.pos.y / height;
         inputs[2] = closest.top / height;
         inputs[3] = closest.bottom / height;

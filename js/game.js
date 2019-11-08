@@ -54,10 +54,6 @@ class Game {
                 this.poles[i].passed = true;
                 this.pop.pass();
                 this.passed++;
-                if (this.passed % 5 == 0) {
-                    this.spawnRate *= 0.95;
-                    this.pole_speed *= 1.15;
-                }
             }
         }
 

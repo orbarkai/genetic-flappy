@@ -57,7 +57,7 @@ class Bird {
         if (this.pos.y - this.r <= 0) return true;
 
         for (let pole of poles) {
-            if (this.pos.x + this.r >= pole.x && this.pos.x - this.r <= pole.x + pole.width) {
+            if (this.pos.x + this.r >= pole.x && this.pos.x - this.r <= pole.x + Pole.width) {
                 if (this.pos.y - this.r <= pole.top || this.pos.y + this.r >= pole.bottom) return true;
             }
         }
@@ -158,24 +158,26 @@ class Bird {
 
 class Pole {
 
-    constructor(margin, width_, speed_, x_) {
+    static speed = 2;
+    static width = 50;
+    static gapHeight = 250;
+
+    constructor(x_) {
         this.x = x_ || width;
-        this.top = random(height - margin);
-        this.bottom = this.top + margin;
-        this.width = width_;
-        this.speed = speed_;
+        this.top = random(height - Pole.gapHeight);
+        this.bottom = this.top + Pole.gapHeight;
         this.passed = false;
     }
 
     update() {
-        this.x -= this.speed;
+        this.x -= Pole.speed;
     }
 
     show() {
         noStroke();
         fill(0, 255, 100);
-        rect(this.x, 0, this.width, this.top);
-        rect(this.x, this.bottom, this.width, height);
+        rect(this.x, 0, Pole.width, this.top);
+        rect(this.x, this.bottom, Pole.width, height);
     }
 
 }

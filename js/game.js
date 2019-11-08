@@ -1,29 +1,24 @@
 class Game {
 
     constructor (pop) {
+        console.log('constructro, pop');
         this.pop = pop;
         this.speed = 1;
         this.history = [];
 
         this.initWorld();
-
-        
     }
 
     initWorld() {
+        console.log('init');
         this.poles = [];
         this.spawnRate = 180;
         this.spawnCounter = 0;
         this.passed = 0;
 
-
-        this.pole_speed = 2;
-        this.pole_width = 50;
-        this.pole_height = 250;
-
-        let poleMargin = this.spawnRate * this.pole_speed; 
-        for (let i = width; i >= 700 + poleMargin; i -= poleMargin) {
-            this.poles.push(new Pole(this.pole_height, this.pole_width, this.pole_speed, i));
+        let poleMargin = this.spawnRate * Pole.speed; 
+        for (let i = width; i >= 600 + poleMargin; i -= poleMargin) {
+            this.poles.push(new Pole(i));
         }
         
     }
@@ -43,7 +38,7 @@ class Game {
 
         //summon poles
         if (this.spawnCounter >= this.spawnRate) {
-            this.poles.push(new Pole(this.pole_height, this.pole_width, this.pole_speed));
+            this.poles.push(new Pole());
             this.spawnCounter = 0;
         }
 

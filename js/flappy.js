@@ -18,7 +18,9 @@ class Bird {
     update(poles) {
         if (this.alive) {
 
-            this.tryJump(this.closest(poles));
+            let closestPole = this.closest(poles);
+
+            this.tryJump(closestPole);
 
              // Gravity
             this.vel.y += 0.3;
@@ -28,7 +30,11 @@ class Bird {
             // Check If Dies
             if (this.collide(poles)) this.alive = false;
 
-            this.score += 0.01;
+            let poleGapMiddle = (closestPole.bottom + closestPole.top) / 2;
+            let distanceFromMiddle = Math.abs(poleGapMiddle - this.pos.y);
+            let score = map(distanceFromMiddle, 0, height, 0.02, 0.01);
+
+            this.score += score;
         }
     }
 

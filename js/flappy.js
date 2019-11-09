@@ -18,7 +18,9 @@ class Bird {
     update(poles) {
         if (this.alive) {
 
-            this.tryJump(this.closest(poles));
+            let closestPole = this.closest(poles);
+
+            this.tryJump(closestPole);
 
              // Gravity
             this.vel.y += 0.3;
@@ -28,8 +30,13 @@ class Bird {
             // Check If Dies
             if (this.collide(poles)) this.alive = false;
 
-            this.score += 0.01;
+            let poleGapMiddle = (closestPole.bottom + closestPole.top) / 2;
+            let distanceFromMiddle = Math.abs(poleGapMiddle - this.pos.y);
+            let score = map(distanceFromMiddle, 0, height, 0.02, 0);
+
+            this.score += score;
         }
+
     }
 
     show() {
@@ -39,6 +46,8 @@ class Bird {
             fill(this.clr.levels[0], this.clr.levels[1], this.clr.levels[2], 100);
             ellipse(this.pos.x, this.pos.y, this.r * 2);
         }
+
+        
     }
 
     jump() {
@@ -51,7 +60,7 @@ class Bird {
         if (this.pos.y - this.r <= 0) return true;
 
         for (let pole of poles) {
-            if (this.pos.x + this.r >= pole.x && this.pos.x - this.r <= pole.x + pole.width) {
+            if (this.pos.x + this.r >= pole.x && this.pos.x - this.r <= pole.x + Pole.width) {
                 if (this.pos.y - this.r <= pole.top || this.pos.y + this.r >= pole.bottom) return true;
             }
         }
@@ -61,7 +70,7 @@ class Bird {
     tryJump(closest) {
 
         let inputs = [];
-        inputs[0] = this.vel.y;
+        inputs[0] = this.vel.y / 100;
         inputs[1] = this.pos.y / height;
         inputs[2] = closest.top / height;
         inputs[3] = closest.bottom / height;
@@ -94,12 +103,15 @@ class Bird {
         let child_input = [];
         let child_output = [];
 
+        let breakPoint = random(my_input.length);
         for (let i = 0; i < my_input.length; i++) {
-            if (random() > 0.5) child_input.push(my_input[i]);
+            if (i < breakPoint) child_input.push(my_input[i]);
             else child_input.push(other_input[i]);
         }
+
+        breakPoint = random(my_input.length);
         for (let i = 0; i < my_output.length; i++) {
-            if (random() > 0.5) child_output.push(my_output[i]);
+            if (i < breakPoint) child_output.push(my_output[i]);
             else child_output.push(other_output[i]);
         }
 
@@ -149,24 +161,26 @@ class Bird {
 
 class Pole {
 
-    constructor(margin, width_, speed_, x_) {
+    static speed = 2;
+    static width = 50;
+    static gapHeight = 250;
+
+    constructor(x_) {
         this.x = x_ || width;
-        this.top = random(height - margin);
-        this.bottom = this.top + margin;
-        this.width = width_;
-        this.speed = speed_;
+        this.top = random(height - Pole.gapHeight);
+        this.bottom = this.top + Pole.gapHeight;
         this.passed = false;
     }
 
     update() {
-        this.x -= this.speed;
+        this.x -= Pole.speed;
     }
 
     show() {
         noStroke();
         fill(0, 255, 100);
-        rect(this.x, 0, this.width, this.top);
-        rect(this.x, this.bottom, this.width, height);
+        rect(this.x, 0, Pole.width, this.top);
+        rect(this.x, this.bottom, Pole.width, height);
     }
 
 }
